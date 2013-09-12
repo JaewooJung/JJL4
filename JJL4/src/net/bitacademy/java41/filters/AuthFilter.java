@@ -31,7 +31,8 @@ public class AuthFilter implements Filter {
 		if (member != null || /*로그인 했다면*/
 				request.getServletPath().contains("auth/login") || /* 로그인/로그아웃 요청인 경우*/
 				request.getServletPath().contains("auth/LoginForm.html") ||
-				request.getServletPath().contains("member/signinForm.do")) /* 회원가입인 경우 */
+				request.getServletPath().contains("member/signinForm.do") ||
+				request.getServletPath().contains("member/signin.do")) /* 회원가입인 경우 */
 		{ 
 			/*if(request.getServletPath().startsWith("/auth/login")){
 				response.sendRedirect(

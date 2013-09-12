@@ -64,7 +64,7 @@
             <p class="block-heading">Sign Up</p>
             <div class="block-body">
                
-<form action="signin.do" method="post">
+<form action="signin.do">
 <label>*이메일</label>
 <input type="text" name="email"><br>
 <label>*암호</label>

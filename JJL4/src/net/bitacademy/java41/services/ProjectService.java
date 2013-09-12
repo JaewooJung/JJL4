@@ -1,6 +1,7 @@
 package net.bitacademy.java41.services;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.bitacademy.java41.dao.MemberDao;
@@ -22,6 +23,53 @@ public class ProjectService {
 		this.dbPool = dbPool;
 		return this;
 	}
+	
+	public ProjectService setMemberDao(MemberDao memberDao) {
+		this.memberDao = memberDao;
+		return this;
+	}
+	
+	public ArrayList<Project> getProject(String email) throws Exception {
+		
+		Connection con = dbPool.getConnection();
+		con.setAutoCommit(false);
+		try {
+			ArrayList<Project> list = projectDao.getProject(email);
+			con.commit();
+			return list;
+			
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+			
+		} finally {
+			con.setAutoCommit(true);
+			dbPool.returnConnection(con);
+		}
+		
+		
+	}
+	
+	public ArrayList<Project> getProject() throws Exception {
+		Connection con = dbPool.getConnection();
+		con.setAutoCommit(false);
+		try {
+			ArrayList<Project> list = projectDao.getProject(); 
+			con.commit();
+			return list;
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+			
+		} finally {
+			con.setAutoCommit(true);
+			dbPool.returnConnection(con);
+		}
+		
+		
+	}
+	
+	
 	/*
 	public List<Project> getProjectList() throws Exception {
 		return projectDao.list();

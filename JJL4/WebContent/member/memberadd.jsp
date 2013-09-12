@@ -10,7 +10,7 @@
 		scope="session"></jsp:useBean>   
 <jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
 		scope="session"></jsp:useBean>  
-<jsp:useBean id="memberUpdate" type="net.bitacademy.java41.vo.Member" 
+<jsp:useBean id="allmember" type="java.util.List<net.bitacademy.java41.vo.Member>" 
 		scope="session"></jsp:useBean>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,10 +23,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
     
-    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/theme.css">
+    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.css">
 
     <script src="lib/jquery-1.7.2.min.js" type="text/javascript"></script>
 
@@ -71,14 +71,16 @@
   <body class=""> 
   <!--<![endif]-->
     
-<jsp:include page="header.jsp"></jsp:include>
- <jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>    
+
+
+ <jsp:include page="../sidebar.jsp"></jsp:include>
     
     <div class="content">
         
         <div class="header">
             
-            <h1 class="page-title">회원 정보 수정 </h1>
+            <h1 class="page-title">회원 추가 </h1>
         </div>
        
         
@@ -97,14 +99,38 @@
   </div>
 </div>-->
 <div class="well">
- <form action="passwordreset2" method="post">
-<label>기존 패스워드</label>
+ <form action="memberadd.do" method="post">
+<label>*이메일</label>
+<input type="text" name="email"><br>
+<label>*암호</label>
 <input type="password" name="password"><br>
-<label>새로운 패스워드</label>
-<input type="password" name="newPassword"><br>
-<label>새로운 패스워드 확인</label>
-<input type="password" name="newPassword2"><br>
-<input type="submit" class="btn btn-primary" value="암호 재설정"><br>
+<label>*암호 확인</label>
+<input type="password" name="password2"><br>
+<label>*이름</label>
+<input type="text" name="name"><br>
+<label>*전화</label>
+<input type="text" name="tel"><br>
+<label>블로그</label>
+<input type="text" name="blog"><br>
+<label>우편번호</label>
+<input type="text" name="postno">
+<p><input type="button" class="btn btn-primary" value="우편번호찾기"><br></p>
+<label>기본주소</label>
+<input type="text" name="basicAddr"><br>
+<label>상세주소</label>
+<input type="text" name="detailAddr"><br>
+<label>태그</label>
+<input type="text" name="tag"><br>
+<label>권한</label>
+<select name="level">
+<option value="0" selected>일반회원</option>
+<option value="1">관리자</option>
+<option value="2">PM</option>
+<option value="9">손님</option>
+</select><br>
+
+<input type="reset" class="btn btn-primary pull-right" value="취소">
+<input type="submit" class="btn btn-primary pull-right" value="회원추가">
 
 </form>
 </div>

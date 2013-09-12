@@ -5,13 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:choose>
-<c:when test="${status == 'NEW_PASSWORD_ERROR'}"><meta http-equiv="Refresh" content="2;url=passwordreset"></c:when>
-<c:when test="${status == 'OLD_PASSWORD_ERROR'}"><meta http-equiv="Refresh" content="2;url=passwordreset"></c:when>
-<c:when test="${status == 'SUCCESS'}"><meta http-equiv="Refresh" content="2;url=memberupdate?email=${memberUpdate.email}"></c:when>
-<c:otherwise>손님</c:otherwise>
-</c:choose>
-<meta http-equiv="Refresh" content="2;url=memberupdate?email=${memberUpdate.email}">
+<meta http-equiv="Refresh" content="2;url=mymemberupdateForm.do">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>암호변경</title>
 </head>

@@ -9,17 +9,17 @@ import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.dao.MemberDao;
+import net.bitacademy.java41.services.AuthService;
 import net.bitacademy.java41.vo.Member;
 
 public class LoginControl implements PageControl{
 
-	MemberDao memberDao;
-	
-	public LoginControl setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
+	AuthService authService;
+
+	public LoginControl setAuthService(AuthService authService) {
+		this.authService = authService;
 		return this;
 	}
-	
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
@@ -30,8 +30,8 @@ public class LoginControl implements PageControl{
 		
 		String email = paramMap.get("email")[0];
 		String password = paramMap.get("password")[0];
-		
-		Member member = memberDao.getMember(email, password);
+	
+		Member member = authService.getUserInfo(email, password);
 		HttpSession session = (HttpSession)model.get("session");
 		HttpServletRequest request = (HttpServletRequest) model.get("request");
 		HttpServletResponse response = (HttpServletResponse) model.get("response");
@@ -56,5 +56,8 @@ public class LoginControl implements PageControl{
 		}
 		
 	}
+
+
+	
 
 }

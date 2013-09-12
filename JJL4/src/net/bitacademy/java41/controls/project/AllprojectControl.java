@@ -9,13 +9,14 @@ import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.dao.ProjectDao;
+import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.vo.Project;
 
 public class AllprojectControl implements PageControl{
-	ProjectDao projectDao;
-	
-	public AllprojectControl setProjectDao(ProjectDao projectDao){
-		this.projectDao = projectDao;
+	ProjectService projectService;
+
+	public AllprojectControl setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
 		return this;
 	}
 	
@@ -25,7 +26,9 @@ public class AllprojectControl implements PageControl{
 		
 			
 			HttpSession session = (HttpSession)model.get("session");
-			ArrayList<Project> project = projectDao.getProject();
+			
+			ArrayList<Project> project = (ArrayList<Project>) projectService.getProject(); 
+					
 			if (project != null) {
 				session.setAttribute("project", project);
 				return "../project/allproject.jsp";

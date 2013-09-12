@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Refresh" content="1;url=../auth/memberupdate?email=${memberUpdate.email}">
+<meta http-equiv="Refresh" content="1;url=../member/memberupdateForm.do?email=${memberUpdate.email}">
 <title>업데이트 실패</title>
 </head>
 <body>

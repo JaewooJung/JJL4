@@ -1,15 +1,8 @@
 package net.bitacademy.java41.controls.member;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.controls.PageControl;
@@ -17,20 +10,20 @@ import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
 
-public class SigninControl implements PageControl {
-	
+public class MemberAddControl implements PageControl{
 	MemberService memberService;
 	
-	public SigninControl setMemberService(MemberService memberService) {
+	public MemberAddControl setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 		return this;
 	}
+
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
-		@SuppressWarnings("unchecked")
 		
 		Map<String, String[]> params = (Map<String, String[]>)model.get("params");
-
+		HttpSession session = (HttpSession) model.get("session");
+		
 		Member member = new Member()
 		.setEmail(params.get("email")[0])
 		.setName(params.get("name")[0])
@@ -40,28 +33,8 @@ public class SigninControl implements PageControl {
 		.setDetailAddress(params.get("detailAddr")[0])
 		.setTag(params.get("tag")[0])
 		.setLevel(Integer.parseInt(params.get("level")[0]));
-	
+
 		memberService.signUp(member);
-		
-		HttpSession session = (HttpSession) model.get("session");
-		session.setAttribute("member", member);
-		
-		return "redirect:../main.do";
-		
+		return "redirect:../member/allmember.do";
 	}
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-

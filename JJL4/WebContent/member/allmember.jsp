@@ -79,7 +79,7 @@
             
             <h1 class="page-title">회원 관리 </h1>
         </div>
-        <p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/auth/addmember" >멤버 추가</a></p>
+        <p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/member/memberaddForm.do" >멤버 추가</a></p>
         
             <!-- <li><a href="index.html">Home</a> <span class="divider">/</span></li> 
             <li class="active">Users</li>
@@ -101,7 +101,7 @@
 function confirmDelete(id){
 var ans = confirm(id + "의 정보를 삭제 하시겠습니까?");
 if(ans == "1"){
-document.location = "../member/deletemember.do?email="+ id;
+document.location = "../member/memberdelete.do?email="+ id;
 }
 }	
 </script>
@@ -140,7 +140,7 @@ document.location = "../member/deletemember.do?email="+ id;
             }
             
             %></td>
-          <td><a href="../member/memberupdateForm?email=<%=m.getEmail()%>"><i class="icon-pencil"></i></a></td>
+          <td><a href="../member/memberupdateForm.do?email=<%=m.getEmail()%>"><i class="icon-pencil"></i></a></td>
           <td>
               <a href="javascript:confirmDelete('<%=m.getEmail()%>');"><i class="icon-remove"></i></a>
           </td>

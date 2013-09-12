@@ -5,16 +5,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import net.bitacademy.java41.controls.member.SigninControl;
 import net.bitacademy.java41.dao.ProjectDao;
+import net.bitacademy.java41.services.MemberService;
+import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Project;
 
 public class MainControl implements PageControl{
 
-	ProjectDao projectDao;
+	ProjectService projectService;
 	
-	public MainControl setProjectDao(ProjectDao projectDao) {
-		this.projectDao = projectDao;
+	public MainControl setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
 		return this;
 	}
 	
@@ -23,7 +26,7 @@ public class MainControl implements PageControl{
 		HttpSession session = (HttpSession)model.get("session");
 		Member member = (Member)session.getAttribute("member");
 		
-		ArrayList<Project> project = projectDao.getProject(member.getEmail());
+		ArrayList<Project> project = projectService.getProject(member.getEmail());
 		session.setAttribute("member_project", project);
 		
 		return "/main.jsp";

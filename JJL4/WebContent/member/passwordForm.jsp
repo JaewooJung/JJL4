@@ -10,8 +10,6 @@
 		scope="session"></jsp:useBean>   
 <jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
 		scope="session"></jsp:useBean>  
-<jsp:useBean id="allmember" type="java.util.List<net.bitacademy.java41.vo.Member>" 
-		scope="session"></jsp:useBean>  
 <jsp:useBean id="memberUpdate" type="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>  
 
@@ -25,10 +23,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
     
-    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/theme.css">
+    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.css">
 
     <script src="lib/jquery-1.7.2.min.js" type="text/javascript"></script>
 
@@ -73,8 +71,8 @@
   <body class=""> 
   <!--<![endif]-->
     
-<jsp:include page="header.jsp"></jsp:include>
- <jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
+ <jsp:include page="../sidebar.jsp"></jsp:include>
     
     <div class="content">
         
@@ -99,36 +97,14 @@
   </div>
 </div>-->
 <div class="well">
- <form action="memberupdate" method="post">
-<label>*이메일</label>
-<%=memberUpdate.getEmail() %>
-<label>*암호</label>
+ <form action="passwordreset.do" method="post">
+<label>기존 패스워드</label>
 <input type="password" name="password"><br>
-<p><a href="../auth/passwordreset" class="btn btn-primary" >암호 재설정<br></a></p>
-<label>*이름</label>
-<input type="text" name="name" value = "<%=memberUpdate.getName() %>"><br>
-<label>*전화</label>
-<input type="text" name="tel" value = "<%=memberUpdate.getTel() %>"><br>
-<label>블로그</label>
-<input type="text" name="blog" value = "<%=memberUpdate.getBlog() %>"><br>
-<label>우편번호</label>
-<input type="text" name="postno"  value = "<%=memberUpdate.getAddressNo()%>">
-<p><input type="button" class="btn btn-primary" value="우편번호찾기"><br></p>
-<label>기본주소</label>
-<input type="text" name="basicAddr" value = "<%=memberUpdate.getDetailAddress()%>"><br>
-<label>상세주소</label>
-<input type="text" name="detailAddr" value = "<%=memberUpdate.getDetailAddress()%>"><br>
-<label>태그</label>
-<input type="text" name="tag" value = "<%=memberUpdate.getTag() %>"><br>
-<label>멤버권한</label>
-<select name="level">
-<option value="0" <%if(memberUpdate.getLevel() == 0){out.println("selected");} %>>일반회원</option>
-<option value="1" <%if(memberUpdate.getLevel() == 1){out.println("selected");} %>>관리자</option>
-<option value="2" <%if(memberUpdate.getLevel() == 2){out.println("selected");} %>>PM</option>
-<option value="9" <%if(memberUpdate.getLevel() == 9){out.println("selected");} %>>손님</option>
-</select><br>
-<input type="reset" class="btn btn-primary pull-right" value="취소">
-<input type="submit" class="btn btn-primary pull-right" value="업데이트">
+<label>새로운 패스워드</label>
+<input type="password" name="newPassword"><br>
+<label>새로운 패스워드 확인</label>
+<input type="password" name="newPassword2"><br>
+<input type="submit" class="btn btn-primary" value="암호 재설정"><br>
 
 </form>
 </div>

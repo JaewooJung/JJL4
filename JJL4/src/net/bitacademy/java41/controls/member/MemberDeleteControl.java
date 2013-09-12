@@ -10,10 +10,10 @@ import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
 
-public class MemberDetailControl implements PageControl{
+public class MemberDeleteControl implements PageControl{
 	MemberService memberService;
 	
-	public MemberDetailControl setMemberService(MemberService memberService) {
+	public MemberDeleteControl setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 		return this;
 	}
@@ -26,12 +26,8 @@ public class MemberDetailControl implements PageControl{
 		Member member = memberService.getMember(params.get("email")[0]);
 		HttpSession session = (HttpSession) model.get("session");
 
-		if (member != null) {
-			session.setAttribute("memberdetail", member);
-			return "../member/memberdetail.jsp";
+		memberService.remove(params.get("email")[0]);
+		return "../member/allmember.do";
 		
-		} else {
-			return "../error.jsp";
-		}
 	}
 }

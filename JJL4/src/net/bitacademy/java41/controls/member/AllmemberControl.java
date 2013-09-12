@@ -8,20 +8,24 @@ import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.dao.MemberDao;
+import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
 
 public class AllmemberControl implements PageControl{
-MemberDao memberDao;
+	MemberService memberService;
 	
-	public AllmemberControl setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
+	public AllmemberControl setMemberService(MemberService memberService) {
+		this.memberService = memberService;
 		return this;
 	}
+	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 
 		HttpSession session = (HttpSession) model.get("session");
-		ArrayList<Member> member = (ArrayList<Member>) memberDao.list();
+		
+		ArrayList<Member> member = memberService.list();
+		
 		if (member != null) {
 			session.setAttribute("allmember", member);
 			return "/member/allmember.jsp";

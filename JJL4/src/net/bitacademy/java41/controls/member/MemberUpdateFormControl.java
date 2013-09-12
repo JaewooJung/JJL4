@@ -1,5 +1,6 @@
 package net.bitacademy.java41.controls.member;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -10,14 +11,14 @@ import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
 
-public class MemberDetailControl implements PageControl{
+public class MemberUpdateFormControl implements PageControl{
 	MemberService memberService;
 	
-	public MemberDetailControl setMemberService(MemberService memberService) {
+	public MemberUpdateFormControl setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 		return this;
 	}
-
+	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 		
@@ -25,13 +26,10 @@ public class MemberDetailControl implements PageControl{
 		
 		Member member = memberService.getMember(params.get("email")[0]);
 		HttpSession session = (HttpSession) model.get("session");
-
-		if (member != null) {
-			session.setAttribute("memberdetail", member);
-			return "../member/memberdetail.jsp";
+		session.setAttribute("memberUpdate", member);
 		
-		} else {
-			return "../error.jsp";
-		}
+		return "redirect:../member/memberUpdateForm.jsp";
+		
 	}
+
 }

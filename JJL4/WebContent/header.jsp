@@ -69,19 +69,9 @@
                     
                  <!--    <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li> -->
                     <li id="fat-menu" class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="${rootPath}/auth/logout.do" role="button" class="dropdown-toggle" >
                             <i class="icon-user"></i> 
-                            <c:choose>
-							 <c:when test ="${member.name == null}">
-							  ${"로그인하세요."}
-							 </c:when>
-							 <c:otherwise>
-							  ${member.name}
-							 </c:otherwise>
-							</c:choose>
-							
-                            
-                            <i class="icon-caret-down"></i>
+                            Log out
                         </a>
 
                         <ul class="dropdown-menu">
