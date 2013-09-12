@@ -6,7 +6,6 @@ import java.util.List;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.util.DBConnectionPool;
-import net.bitacademy.java41.vo.MemberProject;
 import net.bitacademy.java41.vo.Project;
 
 public class ProjectService {
@@ -23,7 +22,7 @@ public class ProjectService {
 		this.dbPool = dbPool;
 		return this;
 	}
-	
+	/*
 	public List<Project> getProjectList() throws Exception {
 		return projectDao.list();
 	}
@@ -50,7 +49,7 @@ public class ProjectService {
 			con.setAutoCommit(true);
 			dbPool.returnConnection(con);
 		}
-	}
+	}*/
 }
 
 

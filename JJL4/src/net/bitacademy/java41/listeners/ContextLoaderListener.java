@@ -42,7 +42,7 @@ public class ContextLoaderListener implements ServletContextListener {
 		ctx.setAttribute("/member/signinForm.do", new SigninFormControl());
 		ctx.setAttribute("/member/signin.do", new SigninControl()
 												.setMemberDao(memberDao) );
-		/*
+		
 		AuthService authService = new AuthService().setMemberDao(memberDao);				
 		MemberService memberService = 
 								new MemberService().setMemberDao(memberDao)
@@ -51,7 +51,7 @@ public class ContextLoaderListener implements ServletContextListener {
 								new ProjectService()
 												.setDBConnectionPool(dbpool)
 												.setProjectDao(projectDao);
-		*/
+		
 		
 		ctx.setAttribute("/main.do", new MainControl()
 										.setProjectDao(projectDao));
