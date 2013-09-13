@@ -13,6 +13,13 @@ import net.bitacademy.java41.vo.Member;
 public class MemberDao {
 	DBConnectionPool conPool;
 	
+	public MemberDao setDBConnectionPool(DBConnectionPool conPool) {
+		this.conPool = conPool;
+		return this;
+	}
+	
+	public MemberDao() {	}
+	
 	public MemberDao(DBConnectionPool conPool) {
 		this.conPool = conPool;
 	}

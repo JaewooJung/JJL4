@@ -14,10 +14,16 @@ import net.bitacademy.java41.vo.Project;
 public class ProjectDao {
 	DBConnectionPool conPool;
 	
+	public ProjectDao setDBConnectionPool(DBConnectionPool conPool) {
+		this.conPool = conPool;
+		return this;
+	}
+	
+	public ProjectDao() {}
+	
 	public ProjectDao(DBConnectionPool conPool) {
 		this.conPool = conPool;
 	}
-	
 	public Project getProject(int pno) throws Exception {
 		
 		Connection con = null;
@@ -141,14 +147,14 @@ public class ProjectDao {
 		}		
 	}
 	
-	public int add(Project project, Connection transactionConnection) throws Exception {
-		Connection con = transactionConnection;
+	public int add(Project project) throws Exception {
+		Connection con = null;
 		PreparedStatement projectStmt = null;
 		PreparedStatement projectMemberStmt = null;
 		ResultSet rs = null;
 		
 		try {
-			// 1. 프로젝트를 등록한다.
+			con = this.conPool.getConnection();
 			projectStmt = con.prepareStatement(
 				"insert into SPMS_PRJS("
 				+ " TITLE,CONTENT,START_DATE,END_DATE,TAG)"

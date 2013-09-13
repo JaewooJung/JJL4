@@ -43,7 +43,7 @@ public class MyMemberUpdateControl implements PageControl{
 			return "redirect:../member/mymemberupdateForm.do";
 			
 			}else{
-				return "/member/update_error.jsp";
+				return "/member/update_error2.jsp";
 				
 			}
 		

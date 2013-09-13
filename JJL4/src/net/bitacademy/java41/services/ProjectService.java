@@ -12,16 +12,10 @@ import net.bitacademy.java41.vo.Project;
 
 public class ProjectService {
 	ProjectDao projectDao;
-	DBConnectionPool dbPool;
 	MemberDao memberDao;
 	
 	public ProjectService setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
-		return this;
-	}
-	
-	public ProjectService setDBConnectionPool(DBConnectionPool dbPool) {
-		this.dbPool = dbPool;
 		return this;
 	}
 	
@@ -32,114 +26,33 @@ public class ProjectService {
 	
 	public ArrayList<Project> getProject(String email) throws Exception {
 		
-		Connection con = dbPool.getConnection();
-		con.setAutoCommit(false);
-		try {
-			ArrayList<Project> list = projectDao.getProject(email);
-			con.commit();
-			return list;
-			
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			dbPool.returnConnection(con);
-		}
-		
+	return projectDao.getProject(email);
 		
 	}
 	
 	public ArrayList<Project> getProject() throws Exception {
-		Connection con = dbPool.getConnection();
-		con.setAutoCommit(false);
-		try {
-			ArrayList<Project> list = projectDao.getProject(); 
-			con.commit();
-			return list;
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
+	
+		return projectDao.getProject(); 
 			
-		} finally {
-			con.setAutoCommit(true);
-			dbPool.returnConnection(con);
-		}
-		
-		
 	}
 	
 	public int add(Project project) throws Exception {
-		Connection con = dbPool.getConnection();
-		con.setAutoCommit(false);
-		try {
-			int a = projectDao.add(project, con); 
-			con.commit();
-			return a;
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			dbPool.returnConnection(con);
-		}
 		
+		return projectDao.add(project); 
+			
 	}
 	
 	public int remove(int pno) throws Exception {
-		Connection con = dbPool.getConnection();
-		con.setAutoCommit(false);
-		try {
-			int a = projectDao.remove(pno); 
-			con.commit();
-			return a;
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			dbPool.returnConnection(con);
+			return projectDao.remove(pno); 
 		}
-		
-		
-	}
 	
 	public Project getProject(int pno) throws Exception {
-		Connection con = dbPool.getConnection();
-		con.setAutoCommit(false);
-		try {
-			Project project = projectDao.getProject(pno); 
-			con.commit();
-			return project;
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			dbPool.returnConnection(con);
-		}
+		return projectDao.getProject(pno); 
 		
 	}
 	
 	public int change(Project project) throws Exception {
-		Connection con = dbPool.getConnection();
-		con.setAutoCommit(false);
-		try {
-			int a = projectDao.change(project); 
-			con.commit();
-			return a;
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			dbPool.returnConnection(con);
-		}
+		return projectDao.change(project); 
 		
 		
 	}
