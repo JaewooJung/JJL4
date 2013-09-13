@@ -141,7 +141,7 @@ public class ProjectDao {
 		}		
 	}
 	
-	public int add(Project project) throws Exception {
+	public int add(Project project, Connection transactionConnection) throws Exception {
 		Connection con = transactionConnection;
 		PreparedStatement projectStmt = null;
 		PreparedStatement projectMemberStmt = null;

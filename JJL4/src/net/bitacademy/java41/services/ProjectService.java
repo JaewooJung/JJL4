@@ -74,7 +74,7 @@ public class ProjectService {
 		Connection con = dbPool.getConnection();
 		con.setAutoCommit(false);
 		try {
-			int a = projectDao.add(project); 
+			int a = projectDao.add(project, con); 
 			con.commit();
 			return a;
 		} catch (Exception e) {
