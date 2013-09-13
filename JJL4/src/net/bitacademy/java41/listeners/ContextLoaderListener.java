@@ -15,11 +15,21 @@ import net.bitacademy.java41.controls.member.MemberDeleteControl;
 import net.bitacademy.java41.controls.member.MemberDetailControl;
 import net.bitacademy.java41.controls.member.MemberUpdateControl;
 import net.bitacademy.java41.controls.member.MemberUpdateFormControl;
+import net.bitacademy.java41.controls.member.MyMemberUpdateControl;
+import net.bitacademy.java41.controls.member.MyMemberUpdateFormControl;
+import net.bitacademy.java41.controls.member.PasswordReset2Control;
 import net.bitacademy.java41.controls.member.PasswordResetControl;
+import net.bitacademy.java41.controls.member.PasswordResetForm2Control;
 import net.bitacademy.java41.controls.member.PasswordResetFormControl;
+import net.bitacademy.java41.controls.project.ProjectAddFormControl;
 import net.bitacademy.java41.controls.member.SigninControl;
 import net.bitacademy.java41.controls.member.SigninFormControl;
 import net.bitacademy.java41.controls.project.AllprojectControl;
+import net.bitacademy.java41.controls.project.ProjectAddControl;
+import net.bitacademy.java41.controls.project.ProjectDeleteControl;
+import net.bitacademy.java41.controls.project.ProjectDetailControl;
+import net.bitacademy.java41.controls.project.ProjectUpdateControl;
+import net.bitacademy.java41.controls.project.ProjectUpdateFormControl;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.services.AuthService;
@@ -69,23 +79,22 @@ public class ContextLoaderListener implements ServletContextListener {
 		ctx.setAttribute("/member/memberadd.do", new MemberAddControl().setMemberService(memberService));
 		ctx.setAttribute("/member/memberdelete.do", new MemberDeleteControl().setMemberService(memberService));
 		
-		/*
-		ctx.setAttribute("/project/list.do", new ProjectListControl()
-												.setProjectDao(projectDao));
-		ctx.setAttribute("/project/view.do", new ProjectViewControl()
-												.setProjectDao(projectDao));
-		ctx.setAttribute("/project/addForm.do", new ProjectAddFormControl());
-		ctx.setAttribute("/project/add.do", new ProjectAddControl()
-												.setProjectDao(projectDao));
-		ctx.setAttribute("/member/list.do", new MemberListControl()
-												.setMemberDao(memberDao));
-		ctx.setAttribute("/member/view.do", new MemberViewControl()
-												.setMemberDao(memberDao));
-		ctx.setAttribute("/member/passwordChange.do", new PasswordChangeControl()
-												.setMemberDao(memberDao));	
-		ctx.setAttribute("/member/add.do", new MemberAddControl()
-											.setMemberDao(memberDao));
-		*/
+		
+		ctx.setAttribute("/project/projectaddForm.do", new ProjectAddFormControl());
+		ctx.setAttribute("/project/projectadd.do", new ProjectAddControl().setProjectService(projectService));
+		ctx.setAttribute("/project/projectdelete.do", new ProjectDeleteControl().setProjectService(projectService));
+		
+		ctx.setAttribute("/project/projectdetail.do", new ProjectDetailControl().setProjectService(projectService).setMemberService(memberService));
+		
+		ctx.setAttribute("/project/projectupdateForm.do", new ProjectUpdateFormControl().setProjectService(projectService));
+		ctx.setAttribute("/project/projectupdate.do", new ProjectUpdateControl().setProjectService(projectService));
+		
+		ctx.setAttribute("/member/mymemberupdateForm.do", new MyMemberUpdateFormControl().setMemberService(memberService));
+		ctx.setAttribute("/member/mymemberupdate.do", new MyMemberUpdateControl().setMemberService(memberService));
+		
+		ctx.setAttribute("/member/passwordresetForm2.do", new PasswordResetForm2Control());
+		ctx.setAttribute("/member/passwordreset2.do", new PasswordReset2Control().setMemberService(memberService));
+		
 	}
 	
 	@Override

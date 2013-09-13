@@ -8,6 +8,7 @@ import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.util.DBConnectionPool;
 import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.Project;
 
 public class MemberService {
 	DBConnectionPool dbPool;
@@ -159,7 +160,27 @@ public class MemberService {
 			dbPool.returnConnection(con);
 		}
 		
+		
+		
 	}
 	
+	
+	public List<Member> get(int pno) throws Exception {
+		Connection con = dbPool.getConnection();
+		con.setAutoCommit(false);
+		try {
+			List<Member> list = memberDao.get(pno); 
+			con.commit();
+			return list;
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+			
+		} finally {
+			con.setAutoCommit(true);
+			dbPool.returnConnection(con);
+		}
+		
+	}
 	
 }

@@ -57,7 +57,7 @@
               <thead>
                 <tr>
                   <th><span class="label label-info">Name</span></th>
-                  <th><a href="../auth/mymemberupdate">${member.name}</a></th>
+                  <th><a href="${rootPath}/member/mymemberupdateForm.do">${member.name}</a></th>
                 </tr>
               </thead>
               <tbody>
@@ -100,7 +100,7 @@
         		<ul id="legal-menu" class="nav nav-list collapse in">
             
             	<c:forEach var="project" items="${member_project}">
-					<li><a href="${rootPath}../auth/projectdetail?pno=${project.pno}">${project.title}
+					<li><a href="${rootPath}/project/projectdetail.do?pno=${project.pno}">${project.title}
 						<c:if test="${project.level == 0}">
 						<span class="label label-info">Leader</span>
 						</c:if>

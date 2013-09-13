@@ -81,7 +81,7 @@
             <h1 class="page-title">프로젝트 관리</h1>
         </div>
         <%if(member.getLevel() == 1){ %>
-        	<p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/auth/addproject" >프로젝트 추가</a></p>
+        	<p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/project/projectaddForm.do" >프로젝트 추가</a></p>
         <%}%>
             <!-- <li><a href="index.html">Home</a> <span class="divider">/</span></li> 
             <li class="active">Users</li>
@@ -102,7 +102,7 @@
 function confirmDelete(id){
 var ans = confirm(id + "의 정보를 삭제 하시겠습니까?");
 if(ans == "1"){
-document.location = "../auth/projectdelete?pno="+ id;
+document.location = "../project/projectdelete.do?pno="+ id;
 }
 }	
 </script>
@@ -127,12 +127,12 @@ document.location = "../auth/projectdelete?pno="+ id;
        <% for(Project p : project){%>
        <tr>
           <td><%=p.getPno()%></td>
-          <td><a href="../auth/projectdetail?pno=<%=p.getPno()%>"><%=p.getTitle()%></td>
+          <td><a href="../project/projectdetail.do?pno=<%=p.getPno()%>"><%=p.getTitle()%></td>
           <td><%=p.getStartDate()%></td>
           <td><%=p.getEndDate()%></td>
           <td><%=p.getTag()%></td>
           <%if(member.getLevel() == 1){ %>
-          <td><a href="../auth/projectupdate?pno=<%=p.getPno()%>"><i class="icon-pencil"></i></a></td>
+          <td><a href="../project/projectupdateForm.do?pno=<%=p.getPno()%>"><i class="icon-pencil"></i></a></td>
           <td><a href="javascript:confirmDelete(<%=p.getPno()%>);"><i class="icon-remove"></i></a></td>
           <%}%>
         </tr>

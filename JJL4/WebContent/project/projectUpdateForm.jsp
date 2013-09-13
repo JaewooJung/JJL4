@@ -22,10 +22,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
     
-    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/theme.css">
+    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.css">
 
     <script src="lib/jquery-1.7.2.min.js" type="text/javascript"></script>
 
@@ -70,10 +70,10 @@
   <body class=""> 
   <!--<![endif]-->
     
-<jsp:include page="header.jsp"></jsp:include>    
+<jsp:include page="../header.jsp"></jsp:include>    
 
 
- <jsp:include page="sidebar.jsp"></jsp:include>
+ <jsp:include page="../sidebar.jsp"></jsp:include>
     
     <div class="content">
         
@@ -98,7 +98,7 @@
   </div>
 </div>-->
 <div class="well">
- <form action="projectupdate" method="post">
+ <form action="projectupdate.do" method="post">
 <label>프로젝트 번호</label>
 <input type="text" name="pno" value="${projectUpdate.pno}" readonly><br>
 <label>제목</label>

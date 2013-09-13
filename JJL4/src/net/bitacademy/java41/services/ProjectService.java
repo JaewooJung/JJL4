@@ -7,6 +7,7 @@ import java.util.List;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.util.DBConnectionPool;
+import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Project;
 
 public class ProjectService {
@@ -69,6 +70,79 @@ public class ProjectService {
 		
 	}
 	
+	public int add(Project project) throws Exception {
+		Connection con = dbPool.getConnection();
+		con.setAutoCommit(false);
+		try {
+			int a = projectDao.add(project); 
+			con.commit();
+			return a;
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+			
+		} finally {
+			con.setAutoCommit(true);
+			dbPool.returnConnection(con);
+		}
+		
+	}
+	
+	public int remove(int pno) throws Exception {
+		Connection con = dbPool.getConnection();
+		con.setAutoCommit(false);
+		try {
+			int a = projectDao.remove(pno); 
+			con.commit();
+			return a;
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+			
+		} finally {
+			con.setAutoCommit(true);
+			dbPool.returnConnection(con);
+		}
+		
+		
+	}
+	
+	public Project getProject(int pno) throws Exception {
+		Connection con = dbPool.getConnection();
+		con.setAutoCommit(false);
+		try {
+			Project project = projectDao.getProject(pno); 
+			con.commit();
+			return project;
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+			
+		} finally {
+			con.setAutoCommit(true);
+			dbPool.returnConnection(con);
+		}
+		
+	}
+	
+	public int change(Project project) throws Exception {
+		Connection con = dbPool.getConnection();
+		con.setAutoCommit(false);
+		try {
+			int a = projectDao.change(project); 
+			con.commit();
+			return a;
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+			
+		} finally {
+			con.setAutoCommit(true);
+			dbPool.returnConnection(con);
+		}
+		
+		
+	}
 	
 	/*
 	public List<Project> getProjectList() throws Exception {

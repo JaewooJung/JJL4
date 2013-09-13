@@ -23,10 +23,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.css">
     
-    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/theme.css">
+    <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.css">
 
     <script src="lib/jquery-1.7.2.min.js" type="text/javascript"></script>
 
@@ -71,8 +71,8 @@
   <body class=""> 
   <!--<![endif]-->
     
-<jsp:include page="header.jsp"></jsp:include>
- <jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
+ <jsp:include page="../sidebar.jsp"></jsp:include>
     
     <div class="content">
         
@@ -97,12 +97,12 @@
   </div>
 </div>-->
 <div class="well">
- <form action="mymemberupdate" method="post">
+ <form action="mymemberupdate.do" method="post">
 <label>*이메일</label>
 <%=memberUpdate.getEmail() %>
 <label>*암호</label>
 <input type="password" name="password"><br>
-<p><a href="../auth/passwordreset2" class="btn btn-primary" >암호 재설정<br></a></p>
+<p><a href="../member/passwordresetForm2.do" class="btn btn-primary" >암호 재설정<br></a></p>
 <label>*이름</label>
 <input type="text" name="name" value = "<%=memberUpdate.getName() %>"><br>
 <label>*전화</label>
