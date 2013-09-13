@@ -81,7 +81,7 @@ public class ContextLoaderListener implements ServletContextListener {
 		
 		
 		ctx.setAttribute("/project/projectaddForm.do", new ProjectAddFormControl());
-		ctx.setAttribute("/project/projectadd.do", new ProjectAddControl().setProjectService(projectService));
+		ctx.setAttribute("/project/projectadd.do", new ProjectAddControl().setProjectService(projectService).setMemberService(memberService));
 		ctx.setAttribute("/project/projectdelete.do", new ProjectDeleteControl().setProjectService(projectService));
 		
 		ctx.setAttribute("/project/projectdetail.do", new ProjectDetailControl().setProjectService(projectService).setMemberService(memberService));

@@ -142,29 +142,48 @@ public class ProjectDao {
 	}
 	
 	public int add(Project project) throws Exception {
-		Connection con = null;
-		PreparedStatement stmt = null;
+		Connection con = transactionConnection;
+		PreparedStatement projectStmt = null;
+		PreparedStatement projectMemberStmt = null;
+		ResultSet rs = null;
 		
 		try {
-			con = conPool.getConnection();
-			stmt = con.prepareStatement(
-				"insert into SPMS_PRJS(TITLE, CONTENT, START_DATE, END_DATE, TAG, LEVEL) values(?,?,?,?,?,?)");
-			stmt.setString(1, project.getTitle());
-			stmt.setString(2, project.getContent());
-			stmt.setDate(3, project.getStartDate());
-			stmt.setDate(4, project.getEndDate());
-			stmt.setString(5, project.getTag());
-			stmt.setInt(6, project.getLevel());
-			return stmt.executeUpdate();
+			// 1. 프로젝트를 등록한다.
+			projectStmt = con.prepareStatement(
+				"insert into SPMS_PRJS("
+				+ " TITLE,CONTENT,START_DATE,END_DATE,TAG)"
+				+ " values(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			projectStmt.setString(1, project.getTitle());
+			projectStmt.setString(2, project.getContent());
+			projectStmt.setDate(3, project.getStartDate());
+			projectStmt.setDate(4, project.getEndDate());
+			projectStmt.setString(5, project.getTag());
+			projectStmt.executeUpdate();
+			
+			// * 자동 생성된 PK 값 알아내기
+			rs = projectStmt.getGeneratedKeys();
+			if (rs.next()) {
+				project.setPno( rs.getInt(1) );
+			}
+			
+			// 2. 프로젝트의 PL을 등록한다.
+			projectMemberStmt = con.prepareStatement(
+					"insert into SPMS_PRJMEMB("
+					+ " EMAIL,PNO,LEVEL)"
+					+ " values(?,?,0)");
+			projectMemberStmt.setString(1, project.getLeader());
+			projectMemberStmt.setInt(2, project.getPno());
+			projectMemberStmt.executeUpdate();
+			
+			return project.getPno();
 			
 		} catch (Exception e) {
 			throw e;
 			
 		} finally {
-			try {stmt.close();} catch(Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
+			try {rs.close();} catch(Exception e) {}
+			try {projectStmt.close();} catch(Exception e) {}
+			try {projectMemberStmt.close();} catch(Exception e) {}
 		}
 	}
 /*
