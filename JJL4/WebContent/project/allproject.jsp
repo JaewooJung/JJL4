@@ -80,9 +80,9 @@
             
             <h1 class="page-title">프로젝트 관리</h1>
         </div>
-        <%if(member.getLevel() == 1){ %>
+        
         	<p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/project/projectaddForm.do" >프로젝트 추가</a></p>
-        <%}%>
+        
             <!-- <li><a href="index.html">Home</a> <span class="divider">/</span></li> 
             <li class="active">Users</li>
         </ul>
@@ -131,10 +131,9 @@ document.location = "../project/projectdelete.do?pno="+ id;
           <td><%=p.getStartDate()%></td>
           <td><%=p.getEndDate()%></td>
           <td><%=p.getTag()%></td>
-          <%if(member.getLevel() == 1){ %>
           <td><a href="../project/projectupdateForm.do?pno=<%=p.getPno()%>"><i class="icon-pencil"></i></a></td>
           <td><a href="javascript:confirmDelete(<%=p.getPno()%>);"><i class="icon-remove"></i></a></td>
-          <%}%>
+          
         </tr>
        
        <%} %>

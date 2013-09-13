@@ -66,7 +66,7 @@
                 <ul class="nav pull-right">
                     
                 </ul>
-                <a class="brand" href="../auth/main"><span class="first">JJL</span> <span class="second">Project</span></a>
+                <a class="brand" href="../main.do"><span class="first">JJL</span> <span class="second">Project</span></a>
         </div>
     </div>
     
