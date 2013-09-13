@@ -1,21 +1,22 @@
 <%@page import="net.bitacademy.java41.vo.Member"%>
+<%@page import="net.bitacademy.java41.vo.Task"%>
 <%@page import="net.bitacademy.java41.vo.Project"%>
+<%@page import="java.util.List"%>
+
+
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="member" class="net.bitacademy.java41.vo.Member" 
 		scope="session"></jsp:useBean>   
-<jsp:useBean id="member_project" type="java.util.Collection<net.bitacademy.java41.vo.Project>" 
-		scope="session"></jsp:useBean>  
-<jsp:useBean id="project_detail" type="net.bitacademy.java41.vo.Project" 
+<jsp:useBean id="alltask" type="java.util.List<net.bitacademy.java41.vo.Task>" 
 		scope="session"></jsp:useBean>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
     <meta charset="utf-8">
-    <title>JJL Project - Project Detail</title>
+    <title>Bootstrap Admin</title>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -70,92 +71,102 @@
   <!--<![endif]-->
     
 <jsp:include page="../header.jsp"></jsp:include>
+ <jsp:include page="../sidebar.jsp"></jsp:include>
     
-<jsp:include page="../sidebar.jsp"></jsp:include>
     <div class="content">
         
         <div class="header">
-            <div class="stats">
-    
-</div>
-
-            <h1 class="page-title">Project Detail</h1>
+            
+            <h1 class="page-title">작업 관리 </h1>
         </div>
+        <p align="right" style="pitch: medium;"><a href="<%=application.getContextPath()%>/task/taskaddForm.do" >작업 추가</a></p>
         
-                <ul class="breadcrumb">
-            <li> 
-            <a href="projectdetail.do?pno=${project_detail.pno}">[기본정보]</a> |  
-			<a href="../task/alltask.do?pno=${project_detail.pno}">[작업들]</a> | 
-			<a href="../feed/list.do?projectNo=${project_detail.pno}">[게시판]</a></li>
+            <!-- <li><a href="index.html">Home</a> <span class="divider">/</span></li> 
+            <li class="active">Users</li>
         </ul>
 
         <div class="container-fluid">
             <div class="row-fluid">
                     
+<div class="btn-toolbar">
+    <button class="btn btn-primary"><i class="icon-plus"></i> New User</button>
+    <button class="btn">Import</button>
+    <button class="btn">Export</button>
+  <div class="btn-group">
+  </div>
+</div>-->
+<div class="well">
 
+<script language="javascript">
+function confirmDelete(id){
+var ans = confirm(id + "의 정보를 삭제 하시겠습니까?");
+if(ans == "1"){
+document.location = "../task/taskdelete.do?tno="+ id;
+}
+}	
+</script>
 
-<div class="row-fluid">
-    <div class="block span6">
-        <a href="#tablewidget" class="block-heading" data-toggle="collapse"><h2><%=project_detail.getTitle() %></h2></a>
-        <div id="tablewidget" class="block-body collapse in">
-            <h2>프로젝트 번호 </h2>
-            <%= project_detail.getPno() %>
-            
-            <h2>프로젝트 시작일  </h2>
-            <%= project_detail.getStartDate() %><br>
-            
-            <h2>프로젝트 종료일 </h2>
-            <%= project_detail.getEndDate() %><br>
-            
-            <h2>프로젝트 상세정보  </h2>
-            <%= project_detail.getContent() %><br>
-            
-            <h2>TAG </h2>
-            <%= project_detail.getTag() %><br>
-            
-            <br><br><h2> 멤버 목록</h2>
-            
-            <table class="table list">
-					<tr>
-					<th>이름</th>
-					<th>이메일</th>
-					<th>전화번호</th>
-					<th>블로그</th>
-					<th>권한</th>
-					</tr>
-					
-            <c:forEach var="member" items="${project_detail_members}">
-					<tr>
-					<td>${member.name}</td>
-					<td>${member.email}</td>
-					<td>${member.tel}</td>
-					<td>${member.blog}</td>
-					<c:choose>
-					<c:when test="${member.level == 0}">
-						<td>관리자</td>
-					</c:when>
-					<c:when test="${member.level == 1}">
-						<td>일반 멤버</td>
-					</c:when>
-					<c:otherwise>
-						<td>설정 안된 값</td>
-					</c:otherwise>
-					</c:choose>
-					</tr>
-					
-					
-			</c:forEach>
-			</table>
-                        
-        </div>
-    
-    
-    
-    </div>
-    </div>
-    </div>
-    
+    <table class="table" >
+      <thead >
+        <tr>
+          <th>Task No </th>
+          <th>Title </th>
+          <th>File </th>
+          <th>Start Date </th>
+          <th>End Date </th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+       
+       <% for(Task t : alltask){%>
+       <tr>
+          <td><%=t.getTno()%></td>
+          <td><a href="../task/taskdetail.do?tno=<%=t.getTno()%>"><%=t.getTitle()%></a></td>
+          <td><%=t.getUiprotourl()%></td>
+          <td><%=t.getStartDate()%></td>
+          <td><%=t.getEndDate()%></td>
+          <td><%=t.getStatus()%></td>
+          <td><a href="../task/taskupdateForm.do?tno=<%=t.getTno()%>"><i class="icon-pencil"></i></a></td>
+          <td>
+              <a href="javascript:confirmDelete('<%=t.getTno()%>');"><i class="icon-remove"></i></a>
+          </td>
+        	
+        </tr>
+       
+       <%} %>
+       </tbody>
+    </table>
+</div>
 
+<!-- 
+<div class="pagination">
+    <ul>
+        <li><a href="#">Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next</a></li>
+    </ul>
+</div>
+ -->
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>
 
 
                     
@@ -170,7 +181,7 @@
                     
             </div>
         </div>
-    
+    </div>
     
 
 
